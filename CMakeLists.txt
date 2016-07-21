@@ -12,6 +12,8 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 set(INCLUDE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/include)
 
+set(MIDWARETOOLS_LIBRARIES ${INCLUDE_OUTPUT_PATH}/libMidWareTools.so)
+
 add_subdirectory(src)
 
 #install(FILES matlab/setup_datafusion.m DESTINATION matlab)
