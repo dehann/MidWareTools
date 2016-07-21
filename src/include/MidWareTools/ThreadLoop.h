@@ -1,7 +1,7 @@
 #ifndef __ThreadLoop_h
 #define __ThreadLoop_h
 
-#include <midwaretools/SharedPtrMacros.h>
+#include <MidWareTools/SharedPtrMacros.h>
 #include <boost/thread/thread.hpp>
 #include <iostream>
 

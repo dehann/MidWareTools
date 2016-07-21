@@ -1,5 +1,5 @@
 
-#include <midwaretools/MidWareTools.h>
+#include <MidWareTools/MidWareTools.h>
 
 #include <lcm/lcm-cpp.hpp>
 #include <sys/select.h>

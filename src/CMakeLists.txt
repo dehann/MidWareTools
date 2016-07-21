@@ -11,13 +11,15 @@ link_directories(${LIBRARY_OUTPUT_PATH}) # lcmtypes library in general project o
 include_directories(${LCM_INCLUDE_DIRS})
 include_directories(${CMAKE_BINARY_DIR}/include/)
 
+include_directories(include)
+
 set(srcs
   ThreadLoop.cpp
   )
 
-add_library(midwaretools SHARED ${srcs})
-target_link_libraries(midwaretools ${Boost_LIBRARIES})
-set_target_properties(midwaretools PROPERTIES SOVERSION 1)
+add_library(MidWareTools SHARED ${srcs})
+target_link_libraries(MidWareTools ${Boost_LIBRARIES})
+set_target_properties(MidWareTools PROPERTIES SOVERSION 1)
 
 
 #add_executable(test01 test.cpp)

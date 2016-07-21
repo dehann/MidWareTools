@@ -7,10 +7,10 @@
 #include <boost/function.hpp>
 #include <boost/thread/thread.hpp>
 
-#include <midwaretools/LCMSubscriber.h>
-#include <midwaretools/QueueTypes.h>
-#include <midwaretools/SynchronizedQueue.h>
-#include <midwaretools/CompTimeUtil.hpp>
+#include <MidWareTools/LCMSubscriber.h>
+#include <MidWareTools/QueueTypes.h>
+#include <MidWareTools/SynchronizedQueue.h>
+#include <MidWareTools/CompTimeUtil.hpp>
 
 // These producers subscribe to LCM messages and add received messages to a
 // synchronized queue to be consumed by a separate thread.

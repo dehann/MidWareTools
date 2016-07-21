@@ -1,8 +1,8 @@
 #ifndef __LCMSubscriber_h
 #define __LCMSubscriber_h
 
-#include <midwaretools/Macros.h>
-#include <midwaretools/SharedPtrMacros.h>
+#include <MidWareTools/Macros.h>
+#include <MidWareTools/SharedPtrMacros.h>
 
 #include <lcm/lcm-cpp.hpp>
 

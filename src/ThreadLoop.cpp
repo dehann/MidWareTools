@@ -5,7 +5,7 @@
  *      Author: dehann
  */
 
-#include <midwaretools/ThreadLoop.h>
+#include <MidWareTools/ThreadLoop.h>
 
 //----------------------------------------------------------------------------
 ThreadLoop::ThreadLoop()

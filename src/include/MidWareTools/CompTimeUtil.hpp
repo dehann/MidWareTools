@@ -11,7 +11,7 @@
 #include <string>
 #include <sys/time.h>
 
-#include <midwaretools/PracticalSocket.h>
+#include <MidWareTools/PracticalSocket.h>
 
 //#define COMPTIME_ADDR      "128.30.27.116"
 #define COMPTIME_ADDR      "127.0.0.1"
