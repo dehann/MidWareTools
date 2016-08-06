@@ -20,6 +20,23 @@
 #ifndef __PRACTICALSOCKET_INCLUDED__
 #define __PRACTICALSOCKET_INCLUDED__
 
+#ifdef WIN32
+  #include <winsock.h>         // For socket(), connect(), send(), and recv()
+  typedef int socklen_t;
+  typedef char raw_type;       // Type used for raw data on this platform
+#else
+  #include <sys/types.h>       // For data types
+  #include <sys/socket.h>      // For socket(), connect(), send(), and recv()
+  #include <netdb.h>           // For gethostbyname()
+  #include <arpa/inet.h>       // For inet_addr()
+  #include <unistd.h>          // For close()
+  #include <netinet/in.h>      // For sockaddr_in
+  #include <stdlib.h>          // For atoi
+  #include <cstring>           // For memset
+  typedef void raw_type;       // Type used for raw data on this platform
+#endif
+
+#include <errno.h>           // For errno
 #include <string>            // For string
 #include <exception>         // For exception class
 
@@ -153,7 +170,7 @@ public:
    *   @param bufferLen number of bytes from buffer to be written
    *   @exception SocketException thrown if unable to send data
    */
-  void send(const void *buffer, int bufferLen) throw(SocketException);
+  int send(const void *buffer, int bufferLen) throw(SocketException);
 
   /**
    *   Read into the given buffer up to bufferLen bytes data from this
@@ -163,7 +180,7 @@ public:
    *   @return number of bytes read, 0 for EOF, and -1 for error
    *   @exception SocketException thrown if unable to receive data
    */
-  int recv(void *buffer, int bufferLen) throw(SocketException);
+  int recv(void *buffer, int bufferLen, int flags = 0) throw(SocketException);
 
   /**
    *   Get the foreign address.  Call connect() before calling recv()
@@ -337,4 +354,3 @@ private:
 };
 
 #endif
-

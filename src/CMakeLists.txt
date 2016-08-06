@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-
 set(Boost_USE_MULTITHREADED ON)
 find_package(Boost REQUIRED COMPONENTS system thread)
 include_directories(${Boost_INCLUDE_DIRS})
@@ -9,31 +8,23 @@ find_package(LCM REQUIRED)
 
 link_directories(${LIBRARY_OUTPUT_PATH}) # lcmtypes library in general project output
 include_directories(${LCM_INCLUDE_DIRS})
-# include_directories(${CMAKE_BINARY_DIR}/include/)
+#set(MIDWARE_INCLUDE_DIR ${CMAKE_BINARY_DIR}/include/)
 
-include_directories(include)
+
+message("CMAKE_CURRENT_SOURCE_DIR/include = ${CMAKE_CURRENT_SOURCE_DIR}/include ")
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 
 set(srcs
   ThreadLoop.cpp
+  PracticalSocket.cpp
   )
 
-# set(hdrs
-#   ${PROJECT_BINARY_DIR}/includeMidWareTools/PracticalSocket.h
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/CompTimeUtil.hpp
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/MidWareTools.h
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/ThreadLoop.h
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/MessageQueueProducer.h
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/LCMThread.h
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/LCMSubscriber.h
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/Macros.h
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/QueueTypes.h
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/SharedPtrMacros.h
-#   ${PROJECT_BINARY_DIR}/include/MidWareTools/SynchronizedQueue.h
-#   DESTINATION MidWareTools)
 
-add_library(MidWareTools SHARED ${srcs})
-target_link_libraries(MidWareTools ${Boost_LIBRARIES})
-set_target_properties(MidWareTools PROPERTIES SOVERSION 0.1)
+add_library(MidWareToolslib SHARED ${srcs})
+set_property(TARGET MidWareToolslib PROPERTY OUTPUT_NAME MidWareTools)
+target_link_libraries(MidWareToolslib ${Boost_LIBRARIES} ${LCM_LIBRARIES})
+#set_target_properties(MidWareTools PROPERTIES SOVERSION 0.1)
 
 # install (TARGETS MidWareTools DESTINATION bin)
 # install (FILES ${hdrs}
@@ -41,3 +32,22 @@ set_target_properties(MidWareTools PROPERTIES SOVERSION 0.1)
 
 #add_executable(test01 test.cpp)
 #target_link_libraries(test01 MidWareTools)
+
+# install library
+install(TARGETS MidWareToolslib
+  PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE 
+              GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+)
+#install(EXPORT MidWareTools-targets DESTINATION lib/MidWareTools)
+
+#install header files
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/src/include/MidWareTools/ 
+        DESTINATION include/MidWareTools/
+        FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/src/include/MidWareTools/ 
+        DESTINATION include/MidWareTools/
+        FILES_MATCHING PATTERN "*.hpp")
+
+set(MIDWARETOOLS_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libMidWareTools.so)
